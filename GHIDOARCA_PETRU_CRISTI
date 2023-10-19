@@ -1,0 +1,168 @@
+using System;
+using System.Drawing;
+using OpenTK;
+using OpenTK.Graphics.OpenGL;
+using OpenTK.Input;
+
+
+namespace Ghidoarca_Petru_Cristi_Grupa_3134A
+{
+    class SimpleWindow3D : GameWindow
+    {
+
+        float rotation_speed1 = 0.0f;
+        float rotation_speed2 = 0.0f;
+        float angle1;
+        float angle2;
+        bool showPyramid = true;
+
+        MouseState lastMouseState;
+        float pyramidX = 0.0f;
+        float pyramidY = 0.0f;
+
+
+        // Constructor.
+        public SimpleWindow3D() : base(800, 600)
+        {
+            VSync = VSyncMode.On;
+        }
+
+        //Setarea Imaginii de fundal
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+
+            GL.ClearColor(Color.Cyan);
+            GL.Enable(EnableCap.DepthTest);
+        }
+
+        //Setarea Marimii Obiectului afisat
+        protected override void OnResize(EventArgs e)
+        {
+            base.OnResize(e);
+
+            GL.Viewport(0, 0, Width, Height);
+
+            double aspect_ratio = Width / (double)Height;
+
+            Matrix4 perspective = Matrix4.CreatePerspectiveFieldOfView(MathHelper.PiOver4, (float)aspect_ratio, 1, 64);
+            GL.MatrixMode(MatrixMode.Projection);
+            GL.LoadMatrix(ref perspective);
+        }
+        //Modificarea pozitiei obiectului 
+        protected override void OnUpdateFrame(FrameEventArgs e)
+        {
+
+            base.OnUpdateFrame(e);
+
+            var keyboard = OpenTK.Input.Keyboard.GetState();
+            var mouse = OpenTK.Input.Mouse.GetState();
+
+            if (keyboard[Key.Escape])
+            {
+                Exit();
+                return;
+            }
+
+            // Controlul obiectului prin tastele W (sus) si S (jos) si A (stanga) si D (dreapta).
+            if (keyboard[Key.D])
+            {
+                rotation_speed1 += 10f;
+            }
+            if (keyboard[Key.A])
+            {
+                rotation_speed1 -= 10f;
+            }
+            if (keyboard[Key.W])
+            {
+                rotation_speed2 += 10f;
+            }
+            if (keyboard[Key.S])
+            {
+                rotation_speed2 -= 10f;
+            }
+
+
+            // Control obiect prin mișcarea mouse-ului.
+            if (mouse.X != lastMouseState.X || mouse.Y != lastMouseState.Y)
+            {
+                rotation_speed1 = (mouse.X - Width / 1) / 40.0f;
+                rotation_speed2 = (mouse.Y - Height / 1) / 40.0f;
+            }
+
+
+            lastMouseState = mouse;
+
+
+
+        }
+
+        //Aplicare Modificarii asociate obiectului
+        protected override void OnRenderFrame(FrameEventArgs e)
+        {
+            base.OnRenderFrame(e);
+
+            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
+
+            Matrix4 lookat = Matrix4.LookAt(15, 50, 15, 0, 0, 0, 0, 1, 0);
+            GL.MatrixMode(MatrixMode.Modelview);
+            GL.LoadMatrix(ref lookat);
+
+            angle1 += rotation_speed1 * (float)e.Time;
+            GL.Rotate(angle1, 0.0f, 1.0f, 0.0f);
+            angle2 += rotation_speed2 * (float)e.Time;
+            GL.Rotate(angle2, 1.0f, 0.0f, 0.0f);
+            if (showPyramid)
+            {
+
+                DrawPyramid();
+            }
+
+            SwapBuffers();
+        }
+
+        //Crearea obiectului
+
+        private void DrawPyramid()
+        {
+            GL.Begin(PrimitiveType.Polygon);
+
+
+            GL.Color3(Color.Gold);
+            GL.Vertex3(10.0f, 10.0f, 10.0f);
+            GL.Vertex3(-10.0f, -10.0f, 10.0f);
+            GL.Vertex3(10.0f, -10.0f, 10.0f);
+
+            GL.Color3(Color.PaleGoldenrod);
+            GL.Vertex3(10.0f, 10.0f, 10.0f);
+            GL.Vertex3(10.0f, -10.0f, 10.0f);
+            GL.Vertex3(10.0f, -10.0f, -10.0f);
+
+            GL.Color3(Color.GhostWhite);
+            GL.Vertex3(10.0f, 10.0f, 10.0f);
+            GL.Vertex3(10.0f, -10.0f, -10.0f);
+            GL.Vertex3(-10.0f, -10.0f, -10.0f);
+
+            GL.Color3(Color.LightGray);
+            GL.Vertex3(10.0f, 10.0f, 10.0f);
+            GL.Vertex3(-10.0f, -10.0f, -10.0f);
+            GL.Vertex3(-10.0f, -10.0f, 10.0f);
+
+            GL.End();
+        }
+
+
+        [STAThread]
+        static void Main(string[] args)
+        {
+
+
+            using (SimpleWindow3D example = new SimpleWindow3D())
+            {
+
+
+                example.Run(30.0, 0.0);
+            }
+        }
+    }
+}
