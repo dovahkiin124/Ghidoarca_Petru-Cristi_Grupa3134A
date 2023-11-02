@@ -210,7 +210,7 @@ namespace Ghidoarca_Petru_Cristi_Grupa_3134A
                 DrawPyramid();
                 
             }
-
+            
             // Actualizăm culoarea triunghiului în funcție de valorile RGB si il afisam
             GL.Color3(triangleColor.R / 255.0f, triangleColor.G / 255.0f, triangleColor.B / 255.0f);
 
@@ -309,22 +309,23 @@ namespace Ghidoarca_Petru_Cristi_Grupa_3134A
                 Console.WriteLine(alpha);
             }
             
-            GL.Color3(Color.Gold);
+
+            GL.Color3(1.0, 0.0, 0.0);
             GL.Vertex3(10.0f, 10.0f, 10.0f);
             GL.Vertex3(-10.0f, -10.0f, 10.0f);
             GL.Vertex3(10.0f, -10.0f, 10.0f);
 
-            GL.Color3(Color.PaleGoldenrod);
+            GL.Color3(0.0, 0.0, 0.0);
             GL.Vertex3(10.0f, 10.0f, 10.0f);
             GL.Vertex3(10.0f, -10.0f, 10.0f);
             GL.Vertex3(10.0f, -10.0f, -10.0f);
 
-            GL.Color3(Color.GhostWhite);
+            GL.Color3(0.0, 1.0, 0.0);
             GL.Vertex3(10.0f, 10.0f, 10.0f);
             GL.Vertex3(10.0f, -10.0f, -10.0f);
             GL.Vertex3(-10.0f, -10.0f, -10.0f);
 
-            GL.Color3(Color.LightGray);
+            GL.Color3(0.0, 0.0, 1.0);
             GL.Vertex3(10.0f, 10.0f, 10.0f);
             GL.Vertex3(-10.0f, -10.0f, -10.0f);
             GL.Vertex3(-10.0f, -10.0f, 10.0f);
