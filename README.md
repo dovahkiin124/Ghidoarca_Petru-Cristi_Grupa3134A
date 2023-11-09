@@ -83,3 +83,12 @@ Această valoare reprezintă un număr pe 32 de biți, variind de la 0 (complet 
 
 ## 10. Modul Strip
 Un efect caracteristic de gradient va fi generat pe acea linie, evoluând de la un vertex la cel învecinat.   
+# Tema Laborator 4
+bash
+# Raspunsuri intrebari 
+
+## Ce observați manipulând parametrii oferiți de OpenGL?Ce observați manipulând parametrii oferiți de OpenGL?
+Manipulând parametrii OpenGL, se pot face diferite ajustări ale modului în care este desenat și afișat cubul 3D în fereastra de vizualizare.
+
+## Ce efect va apare la utilizarea canalului de transparență?
+Utilizarea canalului de transparență în OpenGL ar permite controlul transparenței obiectelor desenate. Dacă canalul de transparență este utilizat, culorile pot avea o componentă alfa care indică gradul de opacitate al fiecărui pixel.
