@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using OpenTK;
-
+//Laboratorul 5 
 public static class ObjLoader
 {
     public static List<Vector3> Load(string filePath)
