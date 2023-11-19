@@ -4,7 +4,7 @@ using OpenTK.Graphics;
 using OpenTK.Input;
 using OpenTK.Graphics.OpenGL;
 using System.Collections.Generic;
-
+//Clasa ce se leaga de miscarea obiectului
 public class CubeMovement
 {
     private Vector3 position;
@@ -20,14 +20,14 @@ public class CubeMovement
     public CubeMovement(Vector3 startPosition)
     {
         position = startPosition;
-        // Load vertices from the txt file
+        // Incarca Varfurile din fisier
         vertices = ObjLoader.Load("cube_vertices.txt");
 
     }
 
     public void OnUpdateFrame(FrameEventArgs e)
     {
-        // Update cube position based on keyboard input
+        //Schimba pozitia obiectului in functie de tasta apasata
         var keyboardState = Keyboard.GetState();
         if (keyboardState.IsKeyDown(Key.W))
         {
@@ -46,10 +46,9 @@ public class CubeMovement
             Position = new Vector3(Position.X + speed * (float)e.Time, Position.Y, Position.Z);
         }
 
-        // Verificare pentru limitele ferestrei sau alte logici necesare
-        // ...
+       
 
-        // Desenare cub la poziția curentă
+        // Desenare obiect la poziția curentă
         GL.Begin(PrimitiveType.Quads);
         foreach (var vertex in vertices)
         {
@@ -77,13 +76,13 @@ public class Camera
     {
         var keyboardState = Keyboard.GetState();
 
-        // Toggle between "aproape" and "departe" with the Space key
+        //Schimba pozitia camerei din aproape si departe
         if (keyboardState.IsKeyDown(Key.Space))
         {
             isAproape = !isAproape;
         }
 
-        // Move the camera based on arrow keys
+        // Moisca camera
         if (keyboardState.IsKeyDown(Key.Up))
         {
             position.Y += 2.0f * (float)e.Time;
@@ -169,7 +168,7 @@ public class Game : GameWindow
     {
         base.OnMouseDown(e);
 
-        // Handle mouse clicks if needed
+        
     }
 
     static void Main()
