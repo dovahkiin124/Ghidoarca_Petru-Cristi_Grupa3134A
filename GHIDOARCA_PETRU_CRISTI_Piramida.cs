@@ -7,9 +7,9 @@ using OpenTK.Graphics.OpenGL; //import functionalitati grafice OpenGL pentru Ope
 using OpenTK.Input;
 
 
-namespace Ghidoarca_Petru_Cristi_Grupa_3134A
+namespace GHIDOARCA_PETRU_CRISTI_Piramida.c
 {
-    
+
     class SimpleWindow3D : GameWindow
     {
 
@@ -130,26 +130,26 @@ namespace Ghidoarca_Petru_Cristi_Grupa_3134A
             }
             if (keyboard[Key.A])
             {
-                rotation_speed1 -= 10f/2;
+                rotation_speed1 -= 10f / 2;
             }
-            
+
             if (keyboard[Key.W])
             {
                 rotation_speed2 += 10f / 2;
             }
-           
+
             if (keyboard[Key.S])
             {
                 rotation_speed2 -= 10f / 2;
             }
-            
+
 
 
 
             // Control obiect prin mișcarea mouse-ului.
             if (mouse[MouseButton.Left])
             {
-                
+
                 rotation_speed1 = (mouse.X - Width / 2) / 40.0f;
                 rotation_speed2 = (mouse.Y - Height / 2) / 40.0f;
             }
@@ -158,7 +158,7 @@ namespace Ghidoarca_Petru_Cristi_Grupa_3134A
                 rotation_speed1 = 0.0f;
                 rotation_speed2 = 0.0f;
             }
-             // Adăugăm logica pentru modificarea culorii triunghiului la apăsarea tastelor
+            // Adăugăm logica pentru modificarea culorii triunghiului la apăsarea tastelor
             if (keyboard[Key.R])
             {
                 if (triangleColor.R < 255)
@@ -183,7 +183,7 @@ namespace Ghidoarca_Petru_Cristi_Grupa_3134A
 
 
 
-            
+
 
 
 
@@ -200,17 +200,17 @@ namespace Ghidoarca_Petru_Cristi_Grupa_3134A
             GL.MatrixMode(MatrixMode.Modelview);
             GL.LoadMatrix(ref lookat);
             DrawAxes();
-            angle1 += rotation_speed1 * ((float)e.Time/2);
+            angle1 += rotation_speed1 * ((float)e.Time / 2);
             GL.Rotate(angle1, 0.0f, 1.0f, 0.0f);
-            angle2 += rotation_speed2 * ((float)e.Time*2);
+            angle2 += rotation_speed2 * ((float)e.Time * 2);
             GL.Rotate(angle2, 1.0f, 0.0f, 0.0f);
             if (showPyramid)
             {
 
                 DrawPyramid();
-                
+
             }
-            
+
             // Actualizăm culoarea triunghiului în funcție de valorile RGB si il afisam
             GL.Color3(triangleColor.R / 255.0f, triangleColor.G / 255.0f, triangleColor.B / 255.0f);
 
@@ -308,7 +308,7 @@ namespace Ghidoarca_Petru_Cristi_Grupa_3134A
                 GL.Color3(Color.FromArgb(alpha, 0, 255, 0));
                 Console.WriteLine(alpha);
             }
-            
+
 
             GL.Color3(1.0, 0.0, 0.0);
             GL.Vertex3(10.0f, 10.0f, 10.0f);
@@ -329,12 +329,12 @@ namespace Ghidoarca_Petru_Cristi_Grupa_3134A
             GL.Vertex3(10.0f, 10.0f, 10.0f);
             GL.Vertex3(-10.0f, -10.0f, -10.0f);
             GL.Vertex3(-10.0f, -10.0f, 10.0f);
-            
+
 
 
             GL.End();
         }
-        
+
 
         private void DrawAxes()
         {
@@ -354,12 +354,12 @@ namespace Ghidoarca_Petru_Cristi_Grupa_3134A
             GL.Vertex3(10, 10, 10);
             GL.Vertex3(10, 10, 100);
 
-           
+
 
             GL.LineWidth(20f);
             GL.PointSize(20f);
 
-             GL.End();
+            GL.End();
         }
 
         [STAThread]
